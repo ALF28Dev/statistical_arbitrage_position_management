@@ -6,16 +6,19 @@ class ticker():
         self.price = price
         self.size = size
 
+''' Manage the orders database '''
 class order_management():
     def __init__(self):
         self.connection = sqlite3.connect('order_database.db')
         self.cursor = self.connection.cursor()
-
+    
+    ''' Create a new pending order. '''
     def new_pending_order(self, ticker_one, ticker_two):
         parameters = (ticker_one.ticker, ticker_one.price, ticker_one.size, ticker_two.ticker, ticker_two.price, ticker_two.size)
         self.cursor.execute("insert into pending_orders values (?, ?, ?, ?, ?, ?)", parameters)
         self.connection.commit()
 
+    ''' Create a new filled order and remove it from the pending order table. '''
     def fill_order(self, ticker_one, ticker_two):
         self.cursor.execute("SELECT * FROM pending_orders WHERE buy_ticker=? and sell_ticker=?", (ticker_one, ticker_two,))
         data = self.cursor.fetchone()
@@ -26,6 +29,7 @@ class order_management():
         self.cursor.execute("DELETE FROM pending_orders WHERE buy_ticker=? and sell_ticker=?", (ticker_one,ticker_two,))
         self.connection.commit()
 
+    ''' Create a new pending close order with the latest prices for both stocks within the pair. '''
     def new_pending_close(self, ticker_one, ticker_one_price,ticker_two, ticker_two_price):
         self.cursor.execute("SELECT * FROM filled_orders WHERE buy_ticker=? and sell_ticker=?", (ticker_one, ticker_two,))
         data = self.cursor.fetchone()
@@ -35,6 +39,7 @@ class order_management():
         self.cursor.execute("insert into pending_close values (?, ?, ?, ?, ?, ?)", parameters)
         self.connection.commit()
 
+    ''' Close a position and place it within the trade_logs table. Remove it from the pending_close and filled_orders tables. '''
     def close_position(self, ticker_one, ticker_two):
         print("here")
         self.cursor.execute("SELECT * FROM pending_close WHERE buy_ticker=? and sell_ticker=?", (ticker_one, ticker_two,))
@@ -65,6 +70,7 @@ class order_management():
         self.cursor.execute("SELECT * FROM filled_orders")
         return self.cursor.fetchall()
 
+    ''' Check if a trade is currently open for a specific pair '''
     def check_for_open_position(self, ticker_one, ticker_two):
         cursor = self.connection.cursor()
         cursor.execute("SELECT * FROM filled_orders WHERE buy_ticker=? and sell_ticker=?", (ticker_one, ticker_two,))
