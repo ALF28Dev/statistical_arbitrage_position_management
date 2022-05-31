@@ -20,7 +20,8 @@ When my software detects that the position needs to be closed, a new record will
 
 # Future Improvements
 
-* Add cnacel button functionality
-* Provide accurate statistics regarding the performance of the strategy
+* Add cnacel button functionality.
+* Provide accurate statistics regarding the performance of the strategy.
+* Integerate a brokerage API so that orders can be placed directly/automatically without the need for human interaction.
 
 
