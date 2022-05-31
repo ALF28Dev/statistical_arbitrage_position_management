@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/index.css') }}">
+</head>
+
+<body>
+    <div class="table_area">
+        <h3>Orders to make</h3>
+        <table>
+            <thead>
+                <th>Buy ticker</th>
+                <th>Buy price</th>
+                <th>Buy size</th>
+                <th>Sell size</th>
+                <th>Sell price</th>
+                <th>Sell ticker</th>
+                <th>Open position</th>
+            </thead>
+            <tbody>
+                {% for i in context["pending_positions"] %}
+                <tr>
+                    <td>{{i[0]}}</td>
+                    <td onmouseover="" class="buy_price">{{i[1]}}</td>
+                    <td>{{i[2]}}</td>
+                    <td>{{i[5]}}</td>
+                    <td class="price">{{i[4]}}</td>
+                    <td>{{i[3]}}</td>
+                    <td>
+                        <a href="{{ url_for('fill_order', ticker_one=i[0], ticker_two=i[3] )}}"><button class="blue_button">Open</button></a>
+                        <a><button class="red_button">Cancel</button></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table_area">
+        <h3>Open Positions</h3>
+        <table>
+            <thead>
+                <th>Buy ticker</th>
+                <th>Buy price</th>
+                <th>Buy size</th>
+                <th>Sell size</th>
+                <th>Sell price</th>
+                <th>Sell ticker</th>
+            </thead>
+            <tbody>
+                {% for i in context["current_positions"] %}
+                <tr>
+                    <td>{{i[0]}}</td>
+                    <td onmouseover="" class="buy_price">{{i[1]}}</td>
+                    <td>{{i[2]}}</td>
+                    <td>{{i[3]}}</td>
+                    <td class="price">{{i[4]}}</td>
+                    <td>{{i[5]}}</td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table_area">
+        <h3>Positions to Close</h3>
+        <table>
+            <thead>
+                <th>Buy ticker</th>
+                <th>Buy price</th>
+                <th>Buy size</th>
+                <th>Sell size</th>
+                <th>Sell price</th>
+                <th>Sell ticker</th>
+                <th>Close position</th>
+            </thead>
+            <tbody>
+                {% for i in context["pending_close"] %}
+                <tr>
+                    <td>{{i[0]}}</td>
+                    <td class="buy_price">{{i[1]}}</td>
+                    <td>{{i[2]}}</td>
+                    <td>{{i[3]}}</td>
+                    <td class="price">{{i[4]}}</td>
+                    <td>{{i[0]}}</td>
+                    <td>
+                        <a href="{{ url_for('official_close', ticker_one=i[0], ticker_two=i[3] )}}"> <button class="red_button">Close</button></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="table_area">
+        <h3>Trade Logs</h3>
+        <table>
+            <thead>
+                <th>Buy ticker</th>
+                <th>Buy PL</th>
+                <th>Sell ticker</th>
+                <th>Sell PL</th>
+                <th>Total PL</th>
+            </thead>
+            <tbody>
+                {% for i in context["trade_log"] %}
+                <tr>
+                    <td>{{i[0]}}</td>
+                    <td style="color: #a1ff99;">{{i[1]}}</td>
+                    <td>{{i[2]}}</td>
+                    <td style="color: #ff8787;">{{i[3]}}</td>
+                    <td style="background-color:orange;">{{i[4]}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h4 style="margin-top: 5px;">Stats</h4>
+        <table>
+            <thead>
+                <th>Metric</th>
+                <th>Value</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Return</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>Sharpe Ratio</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>Win Rate</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>Average Win</td>
+                    <td>0</td>
+                </tr>
+                <tr>
+                    <td>Average Loss</td>
+                    <td>0</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

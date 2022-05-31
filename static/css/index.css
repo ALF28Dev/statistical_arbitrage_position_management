@@ -1,0 +1,64 @@
+body {
+
+    background-color: black;
+    margin: 20px 20px 20px;
+    color: white;
+}
+
+.price {
+    background-color: red;
+}
+
+.buy_price {
+    background-color: green;
+}
+
+table {
+    border-width: 1px;
+    border-style: solid;
+    width: 100%;
+}
+
+thead {
+    border-width: 1px;
+    border-style: solid;
+    background-color: rgb(3, 3, 132);
+    padding-left: 5px;
+}
+
+th {
+
+    border-width: 1px;
+    border-style: solid;
+    padding-left: 5px;
+}
+
+td {
+    padding-left: 5px;
+}
+
+button {
+    height: 27px;
+}
+
+.table_area {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 1px;
+    padding: 5px 5px 5px;
+    border-color: grey;
+    margin-top: 15px;
+}
+
+.blue_button {
+    width:70px;
+    background-color: blue;
+    color: white;
+    text-align: center;
+}
+
+.red_button {
+    width:70px;
+    background-color: pink;
+    text-align: center;
+}
