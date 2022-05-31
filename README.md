@@ -7,6 +7,6 @@ Whenever my software detects a pair which meets my  criteria it will be placed w
 When my software detects that the position needs to be closed a new record will be placed within the pending close database table. This record will contain the new current prices of the two stocks. After i have closed the position within my brokerage i can then select the close button. The trade PL will be placed within the trade log database table and the positions will be removed from the pending close and current positions database.
 
 
-<img width="781" alt="Screenshot 2022-05-30 at 23 42 58" src="https://user-images.githubusercontent.com/87500491/171065439-5207fd80-3d0d-4027-9c71-5b5256ba6723.png">
+<img width="796"  alt="Screenshot 2022-05-31 at 11 07 49" src="https://user-images.githubusercontent.com/87500491/171149607-2fb90180-ec8f-485a-8638-9a73ca943a0a.png">
 
 
